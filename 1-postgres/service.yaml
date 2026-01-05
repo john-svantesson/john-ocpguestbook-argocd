@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: john-postgres
+  labels:
+    app: john-postgres
+spec:
+  selector:
+    app: john-postgres              
+  ports:
+    - port: 5432
+      targetPort: 5432
+      protocol: TCP
+  type: ClusterIP

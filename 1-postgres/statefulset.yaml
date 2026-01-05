@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: john-postgres
+  labels:
+    app: john-postgres
+spec:
+  serviceName: john-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: john-postgres
+  template:
+    metadata:
+      labels:
+        app: john-postgres
+    spec:
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: john-postgres-data
+      containers:
+        - name: john-postgres
+          image: quay.io/fedora/postgresql-16:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRESQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: john-guestbook-common-secrets
+                  key: POSTGRESQL_USER
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: john-guestbook-common-secrets
+                  key: POSTGRESQL_PASSWORD
+            - name: POSTGRESQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: john-guestbook-common-secrets
+                  key: POSTGRESQL_DATABASE
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: john-guestbook-common-secrets
+                  key: POSTGRESQL_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: john-guestbook-common-secrets
+                  key: POSTGRESQL_PASSWORD
+            - name: POSTGRES_DB
+              valueFrom:
+                secretKeyRef:
+                  name: john-guestbook-common-secrets
+                  key: POSTGRESQL_DATABASE
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/pgsql/data        
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          livenessProbe:
+            tcpSocket:
+              port: 5432
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - pg_isready -U guestbook -d guestbook
+            initialDelaySeconds: 5
+            periodSeconds: 5
