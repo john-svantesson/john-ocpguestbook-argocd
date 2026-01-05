@@ -7,7 +7,7 @@ spec:
     kind: Service
     name: john-frontend
   port:
-    targetPort: 80
+    targetPort: 8080
   tls:
     termination: Edge
     insecureEdgeTerminationPolicy: Redirect
