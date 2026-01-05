@@ -5,6 +5,7 @@ RUN go mod download
 COPY main.go .
 RUN go build -o guestbook-api .
 
+
 FROM registry.access.redhat.com/ubi10-minimal:10.0
 WORKDIR /
 COPY --from=builder /opt/app-root/src/guestbook-api /guestbook-api
