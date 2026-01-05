@@ -13,7 +13,6 @@ FROM registry.access.redhat.com/ubi10-minimal:10.0
 
 WORKDIR /opt/app-root/src
 COPY --from=builder /opt/app-root/src/guestbook-api /opt/app-root/src/guestbook-api
-
 EXPOSE 8080
 ENV PORT=8080
 CMD ["/opt/app-root/src/guestbook-api"]
