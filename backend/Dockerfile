@@ -1,5 +1,6 @@
 FROM registry.access.redhat.com/ubi10/go-toolset:10.0 AS builder
 
+
 USER 0
 WORKDIR /opt/app-root/src
 
