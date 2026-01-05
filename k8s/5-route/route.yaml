@@ -9,5 +9,5 @@ spec:
   port:
     targetPort: 8080
   tls:
-    termination: Edge
+    termination: edge
     insecureEdgeTerminationPolicy: Redirect
