@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: john-frontend
+spec:
+  to:
+    kind: Service
+    name: john-frontend
+  port:
+    targetPort: 80
+  tls:
+    termination: Edge
+    insecureEdgeTerminationPolicy: Redirect
