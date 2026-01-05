@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: john-backend
-        image: ghcr.io/john-svantesson/john-ocpguestbook-argocd/john-guestbook-backend:2db7c0a
+        image: ghcr.io/john-svantesson/john-ocpguestbook-argocd/john-guestbook-backend:f472191
         ports:
           - containerPort: 8080
         env:
