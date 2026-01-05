@@ -16,5 +16,4 @@ COPY --from=builder /opt/app-root/src/guestbook-api /opt/app-root/src/guestbook-
 
 EXPOSE 8080
 ENV PORT=8080
-
 CMD ["/opt/app-root/src/guestbook-api"]
