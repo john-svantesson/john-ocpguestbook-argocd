@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: ghcr.io/john-svantesson/john-ocpguestbook-argocd/john-guestbook-frontend:a0150d1
+        image: ghcr.io/john-svantesson/john-ocpguestbook-argocd/john-guestbook-frontend:fadc7c5
         ports:
         - containerPort: 8080
         imagePullPolicy: Always
